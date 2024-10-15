@@ -23,7 +23,7 @@ if (flutterVersionName == null) {
     flutterVersionName = "1.0"
 }
 
-def keystorePropertiesFile = rootProject.file("keystore/keystore.properties")
+def keystorePropertiesFile = rootProject.file("../keystore/keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
