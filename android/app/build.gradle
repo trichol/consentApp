@@ -44,6 +44,16 @@ android {
         versionName = flutterVersionName
     }
 
+    signingConfigs {
+        release {
+            keyAlias 'freepartner'                   // Alias de la clé spécifique à utiliser
+            keyPassword 'freepartner'             // Mot de passe pour cette clé spécifique
+            storeFile file('C:\\Users\\thier\\.jenkins\\workspace\\consentApp\\freepartner.jks')    // Chemin vers le fichier keystore
+            storePassword 'freepartner'      // Mot de passe pour accéder au keystore
+        }
+    }
+
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
