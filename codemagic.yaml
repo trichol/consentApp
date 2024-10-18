@@ -1,0 +1,84 @@
+# Fichier codemagic.yaml pour "Kilian Developpé" - CI/CD avec Flutter 3.24.3, Dart et Firebase
+
+workflows:
+  flutter_ci_cd:
+    name: "Kilian CI/CD"
+    max_build_duration: 60
+    triggering:
+      events:
+        - tag
+    environment:
+      flutter: "3.24.3"
+      xcode: latest
+      cocoapods: default
+      vars:
+        FIREBASE_PROJECT_ID: your_firebase_project_id
+        FIREBASE_API_KEY: your_firebase_api_key
+        FIREBASE_APP_ID: your_firebase_app_id
+        FIREBASE_STORAGE_BUCKET: your_storage_bucket
+        FIREBASE_MESSAGING_SENDER_ID: your_sender_id
+        FIREBASE_MEASUREMENT_ID: your_measurement_id
+    scripts:
+      - name: "Install Flutter dependencies"
+        script: |
+          flutter pub get
+      - name: "Run tests"
+        script: |
+          flutter test
+      - name: "Build APK for Android"
+        script: |
+          flutter build apk --release --flavor production --dart-define=FIREBASE_PROJECT_ID=$FIREBASE_PROJECT_ID
+      - name: "Build iOS"
+        script: |
+          flutter build ios --release --no-codesign --flavor production --dart-define=FIREBASE_PROJECT_ID=$FIREBASE_PROJECT_ID
+
+    android_signing:
+      keystore: encoded_keystore
+      keystore_password: $KEYSTORE_PASSWORD
+      key_alias: $KEY_ALIAS
+      key_password: $KEY_PASSWORD
+
+    ios_signing:
+      app_store:
+        apple_id: $APP_STORE_APPLE_ID
+        api_key:
+          issuer_id: $APP_STORE_ISSUER_ID
+          key_id: $APP_STORE_KEY_ID
+          private_key: Encrypted(...)
+        provisioning_profile: $PROVISIONING_PROFILE
+        certificate: $CERTIFICATE
+
+    artifacts:
+      - build/**/outputs/apk/release/app-release.apk
+      - build/ios/ipa
+
+    publishing:
+      email:
+        recipients:
+          - your-email@example.com  # Ajouter votre adresse email ici pour recevoir les artefacts
+        subject: "Build for Kilian Developpé: $BUILD_NUMBER"
+        body: |
+          Bonjour,
+
+          Le build numéro $BUILD_NUMBER pour l'application "Kilian Developpé" est terminé avec succès. Vous trouverez ci-joint les artefacts générés.
+
+          Détails du build:
+          - Numéro de build: $BUILD_NUMBER
+          - Commit: $GIT_COMMIT
+          - Tag: $GIT_TAG
+
+          Merci,
+          L'équipe CI/CD
+
+      google_play:
+        credentials: Encrypted(...)
+        track: internal  # Déploie sur la piste de test interne
+        json_key: $GOOGLE_PLAY_JSON_KEY
+
+      app_store_connect:
+        api_key:
+          issuer_id: $APP_STORE_ISSUER_ID
+          key_id: $APP_STORE_KEY_ID
+          private_key: Encrypted(...)
+        submit_to_app_store: true
+
