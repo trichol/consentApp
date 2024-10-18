@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'regScreen.dart';
+import 'register.dart';
 
-import 'loginScreen.dart';
+import 'login.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -35,7 +35,7 @@ class WelcomeScreen extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const loginScreen()));
+                  MaterialPageRoute(builder: (context) => const LoginScreen()));
             },
             child: Container(
               height: 53,
