@@ -39,6 +39,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    
+    // Add this block to configure the JavaCompile tasks
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:deprecation"
+    }
+
     defaultConfig {
         applicationId = "com.freepartner.consentapp"
         minSdkVersion 21
@@ -54,10 +60,34 @@ android {
     signingConfigs {
         release {
             def keystorePath = System.getenv("KEYSTORE_FILE")
-            storeFile file(keystorePath)
-            storePassword System.getenv("KEYSTORE_PASSWORD")
-            keyAlias System.getenv("KEY_ALIAS")
-            keyPassword System.getenv("KEY_PASSWORD")
+            if (keystorePath == null || keystorePath.isEmpty()) 
+            {
+                println "ATTENTION : Le chemin du keystore est vide ou null"
+                def keystorePropertiesFile = file("/home/user/myapp/keystore/keystore.properties")
+                def keystoreProperties = new Properties()
+                if (keystorePropertiesFile.exists()) 
+                {
+                    println "Le chemin du fichier properties est : ${keystorePropertiesFile.path}"
+                    keystoreProperties.load(new FileInputStream(keystorePropertiesFile)) 
+
+                    storeFile file(keystoreProperties['storeFile'])
+                    storePassword keystoreProperties['storePassword']
+                    keyAlias keystoreProperties['keyAlias']
+                    keyPassword keystoreProperties['keyPassword']
+                }
+                else
+                {
+                    println "FATAL : Pas de fichier properties pour signer le APK"
+                }
+            }
+            else
+            {
+                println "Le chemin du keystore est : ${keystorePath}"
+                storeFile file(keystorePath)
+                storePassword System.getenv("KEYSTORE_PASSWORD")
+                keyAlias System.getenv("KEY_ALIAS")
+                keyPassword System.getenv("KEY_PASSWORD")
+            }
         }
     }
 
