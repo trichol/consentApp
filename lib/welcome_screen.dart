@@ -3,8 +3,7 @@ import 'package:myapp/reg_screen.dart';
 import 'package:myapp/login.dart';
 import 'package:myapp/localization/localization_manager.dart';
 
-
- LocalizationManager _localizationManager = LocalizationManager();
+final LocalizationManager _localizationManager = LocalizationManager();
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -18,7 +17,7 @@ class WelcomeScreen extends StatelessWidget {
           PopupMenuButton<String>(
             onSelected: (String lang) async {
               await _localizationManager.loadLanguage(lang);
-              //setState(() {});  // Mettre à jour l'UI après le changement de langue
+              //setState(() {});  // Update the UI after changing the language
             },
             itemBuilder: (BuildContext context) {
               return [
@@ -33,88 +32,87 @@ class WelcomeScreen extends StatelessWidget {
         height: double.infinity,
         width: double.infinity,
         decoration: const BoxDecoration(
-            gradient: LinearGradient(colors: [
-          Color(0xffB81736),
-          Color(0xff281537),
-        ])),
-        child: Column(children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 50.0),
-            child: Image(image: AssetImage('assets/logo.png')),
-          ),
-          const SizedBox(
-            height: 100,
-          ),
-          const Text(
-            'Welcome Back',
-            style: TextStyle(fontSize: 30, color: Colors.white),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()));
-            },
-            child: Container(
-              height: 53,
-              width: 320,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                border: Border.all(color: Colors.white),
-              ),
-              child: const Center(
-                child: Text(
-                  'SIGN IN',
-                  style: TextStyle(
+          gradient: LinearGradient(colors: [
+            Color(0xffB81736),
+            Color(0xff281537),
+          ]),
+        ),
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 50.0),
+              child: Image(image: AssetImage('assets/logo.png')),
+            ),
+            const SizedBox(height: 100),
+            Text(
+              _localizationManager.getString('welcome'),
+              style: TextStyle(fontSize: 30, color: Colors.white),
+            ),
+            const SizedBox(height: 30),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                );
+              },
+              child: Container(
+                height: 53,
+                width: 320,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(color: Colors.white),
+                ),
+                child: Center(
+                  child: Text(
+                    _localizationManager.getString('sign_in'),
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const RegScreen()));
-            },
-            child: Container(
-              height: 53,
-              width: 320,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30),
-                border: Border.all(color: Colors.white),
-              ),
-              child: const Center(
-                child: Text(
-                  _localizationManager.getString('sign_up'),
-                  style: TextStyle(
+            const SizedBox(height: 30),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const RegScreen()),
+                );
+              },
+              child: Container(
+                height: 53,
+                width: 320,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(color: Colors.white),
+                ),
+                child: Center(
+                  child: Text(
+                    _localizationManager.getString('sign_up'),
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black),
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-          const Spacer(),
-          const Text(
-            'Login with Social Media',
-            style: TextStyle(fontSize: 17, color: Colors.white),
-          ), //
-          const SizedBox(
-            height: 12,
-          ),
-          const Image(image: AssetImage('assets/logo_google.png')),
-          const SizedBox(
-            height: 12,
-          ),
-        ]),
+            const Spacer(),
+            Text(
+              _localizationManager.getString('social_media'),
+              style: TextStyle(fontSize: 17, color: Colors.white),
+            ),
+            const SizedBox(height: 12),
+            const Image(image: AssetImage('assets/logo_google.png')),
+            const SizedBox(height: 12),
+          ],
+        ),
       ),
     );
   }

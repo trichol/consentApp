@@ -1,5 +1,6 @@
 {
-  "title": "Bienvenue",
+  "welcome": "Bienvenue",
   "sign_in": "Se connecter",
-  "sign_up": "S'inscrire"
+  "sign_up": "S'inscrire",
+  "social_media": "Connectez-vous avec les réseaux sociaux"
 }
