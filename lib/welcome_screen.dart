@@ -12,7 +12,7 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter JSON i18n Demo'),
+        title: Text(_localizationManager.getString('title')),
         actions: [
           PopupMenuButton<String>(
             onSelected: (String lang) async {
