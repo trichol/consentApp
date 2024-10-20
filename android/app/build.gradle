@@ -1,5 +1,8 @@
 plugins {
     id "com.android.application"
+    // START: FlutterFire Configuration
+    id 'com.google.gms.google-services'
+    // END: FlutterFire Configuration
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
@@ -50,7 +53,8 @@ android {
     
     signingConfigs {
         release {
-            storeFile file("${projectDir}/keystore/freepartner.jks")
+            def keystorePath = System.getenv("KEYSTORE_FILE")
+            storeFile file(keystorePath)
             storePassword System.getenv("KEYSTORE_PASSWORD")
             keyAlias System.getenv("KEY_ALIAS")
             keyPassword System.getenv("KEY_PASSWORD")

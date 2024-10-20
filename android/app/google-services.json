@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "7899806983",
+    "firebase_url": "https://consentapp-3b955-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "consentapp-3b955",
+    "storage_bucket": "consentapp-3b955.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:7899806983:android:faa3e39466661fba9319a2",
+        "android_client_info": {
+          "package_name": "com.freepartner.consentapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLuvozFouejt5wiZBrlEsSDwQ3dKL64g0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
