@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'regscreen.dart';
+import 'reg_screen.dart';
 
 import 'login.dart';
 
