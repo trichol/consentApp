@@ -1,5 +1,5 @@
 {
-  "title": "Bienvenue dans mon application",
-  "description": "Ceci est une application Flutter qui utilise un fichier JSON pour les textes.",
-  "button_text": "Appuyez ici"
+  "title": "Bienvenue",
+  "sign_in": "Se connecter",
+  "sign_up": "S'inscrire"
 }

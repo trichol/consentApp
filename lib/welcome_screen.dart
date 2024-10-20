@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'reg_screen.dart';
+import 'package:myapp/reg_screen.dart';
+import 'package:myapp/login.dart';
+import 'package:myapp/localization/localization_manager.dart';
 
-import 'login.dart';
+
+ LocalizationManager _localizationManager = LocalizationManager();
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -9,6 +12,23 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Flutter JSON i18n Demo'),
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (String lang) async {
+              await _localizationManager.loadLanguage(lang);
+              //setState(() {});  // Mettre à jour l'UI après le changement de langue
+            },
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(value: 'en', child: Text('English')),
+                PopupMenuItem(value: 'fr', child: Text('Français')),
+              ];
+            },
+          ),
+        ],
+      ),
       body: Container(
         height: double.infinity,
         width: double.infinity,
@@ -73,7 +93,7 @@ class WelcomeScreen extends StatelessWidget {
               ),
               child: const Center(
                 child: Text(
-                  'SIGN UP',
+                  _localizationManager.getString('sign_up'),
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
